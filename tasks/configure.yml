@@ -1,0 +1,25 @@
+---
+
+- name: Configure | Create configuration file
+  template:
+    dest: "{{ web3signer_config_file }}"
+    src: 'web3signer.yml.j2'
+    owner: "{{ web3signer_user }}"
+    group: "{{ web3signer_group }}"
+    mode: '0400'
+  become: True
+  notify:
+    - restart_web3siger
+
+# Web3signer requires key files with .yaml extension
+- name: Configure | Configure validator key files
+  template:
+    src: 'key-file.yaml.j2'
+    dest: "{{ web3signer_keystore_path }}/{{ item }}.yaml"
+    owner: "{{ web3signer_user }}"
+    group: "{{ web3signer_group }}"
+    mode: '0400'
+  loop: "{{ web3signer_keys | flatten(levels=1) }}"
+  become: True
+  notify:
+    - restart_web3siger

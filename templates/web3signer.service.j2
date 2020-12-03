@@ -1,0 +1,16 @@
+[Unit]
+Description=Web3Signer
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User={{ web3signer_user }}
+Group={{ web3signer_group }}
+Environment=HOME={{  web3signer_app_home }}
+ExecStart=/bin/sh -c "{{ web3signer_service_exec_start_command | trim }} >> {{ web3signer_log_path }}/{{ web3signer_log_filename }}"
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

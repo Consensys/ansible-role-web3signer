@@ -1,0 +1,35 @@
+---
+data-path: "{{ web3signer_data_path }}"
+key-store-path: "{{ web3signer_keystore_path }}"
+
+logging: "{{ web3signer_logging }}"
+http-listen-host: "{{ web3signer_http_listen_host }}"
+http-listen-port: {{ web3signer_http_listen_port }}
+http-host-allowlist: "{{ web3signer_http_host_allowlist }}"
+metrics-enabled: {{ web3signer_metrics_enabled | to_json }}
+metrics-host: "{{ web3signer_metrics_host }}"
+metrics-port: {{ web3signer_metrics_port }}
+metrics-categories: "{{ web3signer_metrics_categories | join(',') }}"
+metrics-host-allowlist: "{{ web3signer_host_allowlist }}"
+idle-connection-timeout-seconds: {{ web3signer_idle_connection_timeout_seconds }}
+swagger-ui-enabled: {{ web3signer_swagger_ui_enabled | to_json }}
+
+{% if web3signer_tls_keystore_file is defined %}
+tls-keystore-file: "{{ web3signer_tls_keystore_file }}"
+{% endif %}
+{% if web3signer_tls_keystore_password_file is defined %}
+tls-keystore-password-file: "{{ web3signer_tls_keystore_password_file }}"
+{% endif %}
+{% if web3signer_tls_allow_any_client is defined %}
+tls-allow-any-client: {{ web3signer_tls_allow_any_client | to_json }}
+{% endif %}
+{% if web3signer_tls_known_client_file is defined %}
+tls-known-clients-file: "{{ web3signer_tls_known_client_file }}"
+{% endif %}
+{% if web3signer_tls_allow_ca_clients is defined %}
+tls-allow-ca-clients: "{{ web3signer_tls_allow_ca_clients }}"
+{% endif %}
+
+{% for key in web3signer_config_options[web3signer_command] %}
+{{ web3signer_command }}.{{ key }}
+{% endfor %}

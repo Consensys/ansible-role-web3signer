@@ -1,0 +1,58 @@
+---
+- name: Prepare | Verify database connection
+  postgresql_query:
+    login_host: "{{ web3signer_db_host }}"
+    login_user: "{{ web3signer_db_username }}"
+    login_password: "{{ web3signer_db_password }}"
+    db: "{{ web3signer_db_name }}"
+    query: 'SHOW server_version;'
+  when: "web3signer_db_verify_connection | bool"
+
+- name: Prepare | Create web3signer group
+  group:
+    name: "{{ web3signer_group }}"
+    state: present
+  become: True
+
+- name: Prepare | Create web3signer user
+  user:
+    name: "{{ web3signer_user }}"
+    group: "{{ web3signer_group }}"
+    home: "{{ web3signer_app_home }}"
+    create_home: True
+    state: present
+  become: True
+
+- name: Prepare | Check java installed
+  block:
+  - name: Prepare | Run java command
+    command: 'java -version'
+    become: True
+    register: java_version_output
+    ignore_errors: True
+
+  - name: Prepare | Fail if java is not installed
+    fail:
+      msg: "Java seems not installed. Web3Signer requires java installed."
+    when: "java_version_output.rc != 0"
+
+- name: Prepare | Create required folders
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ web3signer_user }}"
+    group: "{{ web3signer_group }}"
+    mode: '0775'
+  become: True
+  notify:
+    - restart_web3siger
+  loop:
+    - "{{ web3signer_app_home }}"
+    - "{{ web3signer_app_path }}"
+    - "{{ web3signer_config_path }}"
+    - "{{ web3signer_log_path }}"
+    - "{{ web3signer_data_home }}"
+    - "{{ web3signer_data_path }}"
+    - "{{ web3signer_keystore_path }}"
+    - "{{ web3signer_flyway_home }}"
+    - "{{ web3signer_flyway_app_path }}"

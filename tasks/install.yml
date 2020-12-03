@@ -1,0 +1,74 @@
+---
+
+# This download the binary each time. Enhance this by downloading and verifying the checksum
+# then if checksum is changed extract the binary and restart service
+- name: Install | Download the application binary
+  unarchive:
+    src: "{{ web3signer_download_url }}"
+    remote_src: true
+    dest: "{{ web3signer_app_path }}"
+    owner: "{{ web3signer_user }}"
+    group: "{{ web3signer_group }}"
+    mode: '0775'
+    extra_opts:
+      - --strip-components
+      - '1'
+  become: true
+  register: extract_src
+  notify:
+    - restart_web3siger
+
+- name: Install | Set symlink
+  file:
+    src: "{{ web3signer_app_path }}"
+    dest: "{{ web3signer_app_current }}"
+    state: link
+  become: True
+
+- name: Install | Configure service file
+  template:
+    src: 'web3signer.service.j2'
+    dest: "{{ web3signer_service_file }}"
+    mode: '0644'
+    owner: 'root'
+    group: 'root'
+  become: True
+  notify:
+    - restart_web3siger
+  register: _service_file
+
+- name: Install | Run DB migration
+  block:
+    - name: Install | Download flyway binary
+      unarchive:
+        src: "{{ web3signer_flyway_binary_url }}"
+        dest: "{{ web3signer_flyway_app_path }}"
+        owner: "{{ web3signer_user }}"
+        group: "{{ web3signer_group }}"
+        remote_src: True
+        creates: "{{ web3signer_flyway_app_path }}/flyway"
+        extra_opts:
+          - --strip-components
+          - '1'
+      become: True
+
+    - name: Install | Set symlink for current
+      file:
+        src: "{{ web3signer_flyway_app_path }}"
+        dest: "{{ web3signer_flyway_app_current }}"
+        state: link
+      become: True
+      notify:
+        - restart_web3siger
+
+    - name: Install | Perform flyway migration
+      command: "{{ web3signer_flyway_command }}"
+      become: True
+      register: _flyway_output
+
+    - name: Install | Trigger restart for flyway migration
+      debug:
+        msg: "Trigger restart of web3signer for changed DB schema"
+      notify:
+        - restart_web3siger
+      when: "'Successfully applied' in _flyway_output.stdout"

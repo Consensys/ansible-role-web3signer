@@ -1,0 +1,5 @@
+type: "{{ web3signer_keys[item].type }}"
+keyType: "{{ web3signer_keys[item].keyType }}"
+{% if web3signer_keys[item].type == 'file-raw' %}
+privateKey: "{{ web3signer_keys[item].privateKey }}"
+{% endif %}

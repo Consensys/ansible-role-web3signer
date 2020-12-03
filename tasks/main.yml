@@ -1,0 +1,16 @@
+---
+
+- name: Include prepare tasks
+  include_tasks: 'prepare.yml'
+
+- name: Include configure tasks
+  include_tasks: 'configure.yml'
+
+- name: Include install tasks
+  include_tasks: 'install.yml'
+
+- name: Flush handlers before tests
+  meta: flush_handlers
+
+- name: Include test tasks
+  include_tasks: 'test.yml'

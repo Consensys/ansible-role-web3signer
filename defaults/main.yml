@@ -1,0 +1,105 @@
+---
+# Web3signer binary
+web3signer_version: 'develop'
+web3signer_download_url: "https://bintray.com/consensys/pegasys-repo/download_file?file_path=web3signer-{{ web3signer_version }}.tar.gz"
+
+# OS user and group
+web3signer_user: 'web3signer'
+web3signer_group: "{{ web3signer_user }}"
+
+# Folders
+web3signer_app_home: '/opt/web3signer'
+web3signer_app_path: '{{ web3signer_app_home }}/{{ web3signer_version }}'
+web3signer_app_current: '{{ web3signer_app_home }}/current'
+web3signer_config_path: '/etc/web3signer'
+web3signer_log_path: '/var/log/web3signer'
+web3signer_data_home: '/data/web3signer'
+web3signer_data_path: "{{ web3signer_data_home }}/data"
+web3signer_keystore_path: "{{ web3signer_data_home }}/keys"
+
+# Log filename. This is combined with web3signer_logs_path
+web3signer_log_filename: 'web3signer.log'
+
+# DB connection parameters
+# web3signer_db_verify_connection=True will perform a test connection before the installation
+web3signer_db_verify_connection: True
+web3signer_db_host: ''
+web3signer_db_name: ''
+web3signer_db_username: ''
+web3signer_db_password: ''
+
+# Flyway for database migration. Application does not perform flyway migration on start currently
+web3signer_flyway_version: '7.3.0'
+web3signer_flyway_binary_url_parts:
+  - 'https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline'
+  - "{{ web3signer_flyway_version }}"
+  - "flyway-commandline-{{ web3signer_flyway_version }}-linux-x64.tar.gz"
+web3signer_flyway_binary_url: "{{ web3signer_flyway_binary_url_parts | join ('/') }}"
+web3signer_flyway_home: '/opt/flyway'
+web3signer_flyway_app_path: "/opt/flyway/flyway-{{ web3signer_flyway_version }}"
+web3signer_flyway_app_current: "{{ web3signer_flyway_home }}/current"
+web3signer_flyway_command: >-
+  {{ web3signer_flyway_app_current }}/flyway migrate
+  -user={{ web3signer_db_username }}
+  -password={{ web3signer_db_password }}
+  -url=jdbc:postgresql://{{ web3signer_db_host }}/{{ web3signer_db_name }}
+  -locations=filesystem:{{ web3signer_app_current }}/migrations/postgresql/
+
+# Systemd service configuration parameters
+web3signer_service_name: 'web3signer'
+web3signer_service_file: "/etc/systemd/system/{{ web3signer_service_name }}.service"
+web3signer_service_exec_start_command: >-
+  {{ web3signer_app_current }}/bin/web3signer
+  {{ web3signer_command_common_options | join(' ') }}
+  {{ web3signer_command }}
+
+# Configuration file
+web3signer_config_filename: 'web3signer.yml'
+web3signer_config_file: "{{ web3signer_config_path }}/{{ web3signer_config_filename }}"
+
+# Command to execute. Currently supported eth1, eth2, filecoin
+web3signer_command: 'eth2'
+
+# Set of options applicable irrespective of the command
+web3signer_command_common_options:
+  - "--config-file={{ web3signer_config_file }}"
+
+# These must be provided as list entries in yaml format
+# example configuration in config file
+# eth2.slashing-protection-enabled: True
+web3signer_config_options:
+  eth1: []
+  eth2:
+    - 'slashing-protection-enabled: True'
+    - "slashing-protection-db-url: 'jdbc:postgresql://{{ web3signer_db_host }}/{{ web3signer_db_name }}'"
+    - "slashing-protection-db-username: {{ web3signer_db_username }}"
+    - "slashing-protection-db-password: {{ web3signer_db_password }}"
+  filecoin: []
+
+# Key configuration need to set in the variable web3signer_keys
+# Each key will be configured in its own file.
+# Ex:
+# key1:
+#   type: 'file-raw'
+#   keyType: 'BLS'
+#  privateKey: '0x6eeb32dd0fe010051825e3ef409b1a7c66ff6daa9c61eb351c5d760684de8e6a'
+web3signer_keys: {}
+
+# Configuration file parameter
+web3signer_logging: 'INFO'
+web3signer_http_listen_host: '127.0.0.1'
+web3signer_http_listen_port: 9000
+web3signer_http_host_allowlist: '127.0.0.1'
+web3signer_metrics_enabled: False
+web3signer_metrics_host: '127.0.0.1'
+web3signer_metrics_port: 9001
+web3signer_metrics_categories:
+  - HTTP
+  - SIGNING
+  - FILECOIN
+  - JVM
+  - PROCESS
+  - ETH2_SLASHING_PROTECTION
+web3signer_host_allowlist: '127.0.0.1'
+web3signer_idle_connection_timeout_seconds: 30
+web3signer_swagger_ui_enabled: False
