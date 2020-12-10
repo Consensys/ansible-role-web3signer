@@ -56,3 +56,17 @@
     - "{{ web3signer_keystore_path }}"
     - "{{ web3signer_flyway_home }}"
     - "{{ web3signer_flyway_app_path }}"
+
+- name: Prepare | Verify log4j file available if provided
+  block:
+  - name: Prepare | Get the log4j file status
+    stat:
+      path: "{{ web3signer_log4j_config_file }}"
+    register: _log4j_file_stat
+
+  - name: Prepare | Fail if log4j file does not exist
+    fail:
+      msg: "Log4j config file {{ web3signer_log4j_config_file }} not exist"
+    when: "not _log4j_file_stat.stat.exists"
+
+  when: "web3signer_log4j_config_file | length > 0"
