@@ -33,3 +33,10 @@ tls-allow-ca-clients: "{{ web3signer_tls_allow_ca_clients }}"
 {% for key in web3signer_config_options[web3signer_command] %}
 {{ web3signer_command }}.{{ key }}
 {% endfor %}
+
+{% if web3_signer_additional_configuration != {} %}
+# Additional configuration
+{% for key in web3_signer_additional_configuration %}
+{{ key }}: {{ web3_signer_additional_configuration[key] }}
+{% endfor %}
+{% endif %}
