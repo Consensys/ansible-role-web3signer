@@ -78,6 +78,10 @@ web3signer_config_options:
     - "slashing-protection-db-password: {{ web3signer_db_password }}"
   filecoin: []
 
+# Can configure additional configuration parameters here.
+# It is upto user to configure them correctly and not to duplicate existing configuration
+web3_signer_additional_configuration: {}
+
 # Key configuration need to set in the variable web3signer_keys
 # Each key will be configured in its own file.
 # Ex:

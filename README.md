@@ -34,41 +34,42 @@ Please refer to the Web3Signer [docs](https://docs.web3signer.consensys.net/en/l
 
 | Name                             | Default Value | Description                        |
 | -------------------------------- | ------------- | -----------------------------------|
-| web3signer_version               | `develop`      | Version to install                 |
-| web3signer_user                  | `web3signer`    | OS user to create and run web3signer |
-| web3signer_group                 | `web3signer`    | OS group |
-| web3signer_app_home              | `/opt/web3signer` | App install location |
-| web3signer_config_path           | `/etc/web3signer` | Config file location |
-| web3signer_log_path              | `/var/log/web3signer` | Log file location |
-| web3signer_log_filename          | `web3signer.log` | Log file name. Location will be web3signer_log_path |
-| web3signer_data_home             | `/data/web3signer` | Location to store any persistent data. Keys stored in a sub folder keys |
-| web3signer_db_verify_connection  | `True`           | Enables checking database available |
-| web3signer_db_host               |                | PostgreSQL database instance host |
-| web3signer_db_name               |                | PostgreSQL database name |
-| web3signer_db_username           |                | PostgreSQL database user |
-| web3signer_db_password           |                | PostgreSQL database user password |
-| web3signer_flyway_version        | `7.3.0`          | Flyway CLI version to download for flyway migration |
-| web3signer_service_name          | `web3signer`     | Systemd service name |
-| web3signer_config_filename       | `web3signer.yml` | Configuration file name. Location will be `web3signer_config_path`|
-| web3signer_command               | `eth2`           | Web3signer command. Supported `eth1`,`eth2`,`filecoin` |
-| web3signer_keys                  | `[]`               | Specify keys to configure. Please see notes below for more details|
-| web3signer_logging               | `INFO`           | Logging verbosity levels: OFF, FATAL, WARN, INFO,DEBUG, TRACE, ALL|
-| web3signer_http_listen_host      | `127.0.0.1`       | Host for HTTP to listen on |
-| web3signer_http_listen_port      | `9000`            | Port for HTTP to listen on |
-| web3signer_http_host_allowlist   | `127.0.0.1`        | Comma separated list of hostnames to allow for http access, or * to accept any host |
-| web3signer_metrics_enabled       | `False`           | Set to start the metrics exporter |
-| web3signer_metrics_host          | `127.0.0.1`       | Host for the metrics exporter to listen on |
-| web3signer_metrics_port          | `9001`            | Port for the metrics exporter to listen on |
+| web3signer_version               | `develop`            | Version to install                 |
+| web3signer_user                  | `web3signer`         | OS user to create and run web3signer |
+| web3signer_group                 | `web3signer`         | OS group |
+| web3signer_app_home              | `/opt/web3signer`    | App install location |
+| web3signer_config_path           | `/etc/web3signer`    | Config file location |
+| web3signer_log_path              | `/var/log/web3signer`| Log file location |
+| web3signer_log_filename          | `web3signer.log`     | Log file name. Location will be web3signer_log_path |
+| web3signer_data_home             | `/data/web3signer`   | Location to store any persistent data. Keys stored in a sub folder keys |
+| web3signer_db_verify_connection  | `True`               | Enables checking database available |
+| web3signer_db_host               |                      | PostgreSQL database instance host |
+| web3signer_db_name               |                      | PostgreSQL database name |
+| web3signer_db_username           |                      | PostgreSQL database user |
+| web3signer_db_password           |                      | PostgreSQL database user password |
+| web3signer_flyway_version        | `7.3.0`              | Flyway CLI version to download for flyway migration |
+| web3signer_service_name          | `web3signer`         | Systemd service name |
+| web3signer_config_filename       | `web3signer.yml`     | Configuration file name. Location will be `web3signer_config_path`|
+| web3signer_command               | `eth2`               | Web3signer command. Supported `eth1`,`eth2`,`filecoin` |
+| web3signer_keys                  | `[]`                 | Specify keys to configure. Please see notes below for more details|
+| web3signer_logging               | `INFO`               | Logging verbosity levels: OFF, FATAL, WARN, INFO,DEBUG, TRACE, ALL|
+| web3signer_http_listen_host      | `127.0.0.1`          | Host for HTTP to listen on |
+| web3signer_http_listen_port      | `9000`               | Port for HTTP to listen on |
+| web3signer_http_host_allowlist   | `127.0.0.1`          | Comma separated list of hostnames to allow for http access, or * to accept any host |
+| web3signer_metrics_enabled       | `False`              | Set to start the metrics exporter |
+| web3signer_metrics_host          | `127.0.0.1`          | Host for the metrics exporter to listen on |
+| web3signer_metrics_port          | `9001`               | Port for the metrics exporter to listen on |
 | web3signer_metrics_categories    | `[HTTP,SIGNING,FILECOIN,JVM,PROCESS,ETH2_SLASHING_PROTECTION]` | Comma separated list of categories to track metrics for |
-| web3signer_host_allowlist        | `127.0.0.1`       | Comma separated list of hostnames to allow for metrics access, or * to accept any host |
-| web3signer_idle_connection_timeout_seconds | `30`    | Number of seconds after which an idle connection will be terminated |
-| web3signer_swagger_ui_enabled    | `False`           | Enable swagger UI |
-| web3signer_tls_keystore_file     |                   | Path to a PKCS#12 formatted keystore used to enable TLS on inbound connections |
-| web3signer_tls_keystore_password_file |              | Path to a file containing the password used to decrypt the keystore |
-| web3signer_tls_allow_any_client  |                   | If defined, any client may connect, regardless of presented certificate. This cannot be set if either a whitelist or CA clients have been enabled |
-| web3signer_tls_known_client_file |                   | Path to a file containing the fingerprints of authorized clients |
-| web3signer_tls_allow_ca_clients  |                   | If defined, allows clients authorized by the CA to connect to EthSigner |
-| web3signer_log4j_config_file     |                   | Custom log4j configuration file |                              
+| web3signer_host_allowlist        | `127.0.0.1`          | Comma separated list of hostnames to allow for metrics access, or * to accept any host |
+| web3signer_idle_connection_timeout_seconds | `30`       | Number of seconds after which an idle connection will be terminated |
+| web3signer_swagger_ui_enabled    | `False`              | Enable swagger UI |
+| web3signer_tls_keystore_file     |                      | Path to a PKCS#12 formatted keystore used to enable TLS on inbound connections |
+| web3signer_tls_keystore_password_file |                 | Path to a file containing the password used to decrypt the keystore |
+| web3signer_tls_allow_any_client  |                      | If defined, any client may connect, regardless of presented certificate. This cannot be set if either a whitelist or CA clients have been enabled |
+| web3signer_tls_known_client_file |                      | Path to a file containing the fingerprints of authorized clients |
+| web3signer_tls_allow_ca_clients  |                      | If defined, allows clients authorized by the CA to connect to EthSigner |
+| web3signer_log4j_config_file     |                      | Custom log4j configuration file |
+| web3_signer_additional_configuration |  `{}`            | Map of additional configurations to set in configuration file. This will helpful configuring parameters when Ansible role has not been updated with recently introduced parameters. | 
 
 ### Configure Signing Keys:
 
