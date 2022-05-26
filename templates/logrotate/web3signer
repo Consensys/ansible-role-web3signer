@@ -1,0 +1,9 @@
+{{ web3signer_log_path }}/*.log {
+    rotate 14
+    notifempty
+    missingok
+    size 25M
+    daily
+    copytruncate
+    compress
+}

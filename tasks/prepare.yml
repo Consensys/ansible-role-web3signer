@@ -57,6 +57,12 @@
     - "{{ web3signer_flyway_home }}"
     - "{{ web3signer_flyway_app_path }}"
 
+- name: Prepare | Setup logrotate
+  template:
+    src: "logrotate/web3signer"
+    dest: "/etc/logrotate.d/web3signer"
+  become: true
+
 - name: Prepare | Verify log4j file available if provided
   block:
   - name: Prepare | Get the log4j file status
