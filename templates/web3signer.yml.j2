@@ -5,12 +5,12 @@ key-store-path: "{{ web3signer_keystore_path }}"
 logging: "{{ web3signer_logging }}"
 http-listen-host: "{{ web3signer_http_listen_host }}"
 http-listen-port: {{ web3signer_http_listen_port }}
-http-host-allowlist: "{{ web3signer_http_host_allowlist }}"
+http-host-allowlist: [{{web3signer_http_host_allowlist|map('to_json')|join(',')}}]
 metrics-enabled: {{ web3signer_metrics_enabled | to_json }}
 metrics-host: "{{ web3signer_metrics_host }}"
 metrics-port: {{ web3signer_metrics_port }}
-metrics-categories: "{{ web3signer_metrics_categories | join(',') }}"
-metrics-host-allowlist: "{{ web3signer_host_allowlist }}"
+metrics-categories: [{{web3signer_metrics_categories|map('to_json')|join(',')}}]
+metrics-host-allowlist: [{{web3signer_metrics_host_allowlist|map('to_json')|join(',')}}]
 idle-connection-timeout-seconds: {{ web3signer_idle_connection_timeout_seconds }}
 swagger-ui-enabled: {{ web3signer_swagger_ui_enabled | to_json }}
 
