@@ -55,12 +55,12 @@ Please refer to the Web3Signer [docs](https://docs.web3signer.consensys.net/en/l
 | web3signer_logging               | `INFO`               | Logging verbosity levels: OFF, FATAL, WARN, INFO,DEBUG, TRACE, ALL|
 | web3signer_http_listen_host      | `127.0.0.1`          | Host for HTTP to listen on |
 | web3signer_http_listen_port      | `9000`               | Port for HTTP to listen on |
-| web3signer_http_host_allowlist   | `127.0.0.1`          | Comma separated list of hostnames to allow for http access, or * to accept any host |
+| web3signer_http_host_allowlist   | ['127.0.0.1']        | Comma separated list of hostnames to allow for http access, or * to accept any host |
 | web3signer_metrics_enabled       | `False`              | Set to start the metrics exporter |
 | web3signer_metrics_host          | `127.0.0.1`          | Host for the metrics exporter to listen on |
 | web3signer_metrics_port          | `9001`               | Port for the metrics exporter to listen on |
-| web3signer_metrics_categories    | `[HTTP,SIGNING,FILECOIN,JVM,PROCESS,ETH2_SLASHING_PROTECTION]` | Comma separated list of categories to track metrics for |
-| web3signer_host_allowlist        | `127.0.0.1`          | Comma separated list of hostnames to allow for metrics access, or * to accept any host |
+| web3signer_metrics_categories    | ['HTTP', 'SIGNING', 'FILECOIN', 'JVM', 'PROCESS', 'ETH2_SLASHING_PROTECTION'] | Comma separated list of categories to track metrics for |
+| web3signer_metrics_host_allowlist| ['127.0.0.1']        | Comma separated list of hostnames to allow for metrics access, or * to accept any host |
 | web3signer_idle_connection_timeout_seconds | `30`       | Number of seconds after which an idle connection will be terminated |
 | web3signer_swagger_ui_enabled    | `False`              | Enable swagger UI |
 | web3signer_tls_keystore_file     |                      | Path to a PKCS#12 formatted keystore used to enable TLS on inbound connections |
