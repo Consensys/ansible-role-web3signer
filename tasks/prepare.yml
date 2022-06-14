@@ -42,7 +42,6 @@
     path: "{{ item }}"
     owner: "{{ web3signer_user }}"
     group: "{{ web3signer_group }}"
-    mode: '0775'
   become: True
   notify:
     - restart_web3siger
