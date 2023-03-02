@@ -68,7 +68,7 @@ Please refer to the Web3Signer [docs](https://docs.web3signer.consensys.net/en/l
 | web3signer_tls_allow_any_client  |                      | If defined, any client may connect, regardless of presented certificate. This cannot be set if either a whitelist or CA clients have been enabled |
 | web3signer_tls_known_client_file |                      | Path to a file containing the fingerprints of authorized clients |
 | web3signer_tls_allow_ca_clients  |                      | If defined, allows clients authorized by the CA to connect to EthSigner |
-| web3signer_log4j_config_file     |                      | Custom log4j configuration file |
+| web3signer_log4j_config_file     | undefined            | Custom log4j configuration file |
 | web3_signer_additional_configuration |  `{}`            | Map of additional configurations to set in configuration file. This will helpful configuring parameters when Ansible role has not been updated with recently introduced parameters. | 
 
 ### Configure Signing Keys:

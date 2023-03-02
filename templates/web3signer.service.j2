@@ -7,7 +7,7 @@ Type=simple
 User={{ web3signer_user }}
 Group={{ web3signer_group }}
 Environment=HOME={{ web3signer_app_home }}
-{% if web3signer_log4j_config_file | length > 0 %}
+{% if web3signer_log4j_config_file is defined %}
 Environment=JAVA_OPTS="-Dlog4j.configurationFile={{ web3signer_log4j_config_file }}"
 {% endif %}
 ExecStart=/bin/sh -c "{{ web3signer_service_exec_start_command | trim }} >> {{ web3signer_log_path }}/{{ web3signer_log_filename }}"
