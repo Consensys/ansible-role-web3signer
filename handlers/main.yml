@@ -1,8 +1,8 @@
 ---
-
 - name: restart_web3siger
   service:
     name: "{{ web3signer_service_name }}"
     state: restarted
+    enabled: True
     daemon_reload: True
   become: True
