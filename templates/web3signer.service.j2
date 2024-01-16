@@ -11,7 +11,8 @@ Environment=HOME={{ web3signer_app_home }}
 Environment=JAVA_OPTS="-Dlog4j.configurationFile={{ web3signer_log4j_config_file }}"
 {% endif %}
 ExecStart=/bin/sh -c "{{ web3signer_service_exec_start_command | trim }} >> {{ web3signer_log_path }}/{{ web3signer_log_filename }}"
-SuccessExitStatus=143
+ExecStartPost=/usr/bin/timeout 30 sh -c 'while ! ss -H -t -l -n sport = :{{ web3signer_http_listen_port }} | grep -q "^LISTEN.*:{{ web3signer_http_listen_port }}"; do sleep 1; done'
+SuccessExitStatus=0 143
 Restart=on-failure
 RestartSec=10s
 
