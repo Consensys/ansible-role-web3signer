@@ -59,7 +59,7 @@ web3signer_service_exec_start_command: >-
 web3signer_config_filename: 'web3signer.yml'
 web3signer_config_file: "{{ web3signer_config_path }}/{{ web3signer_config_filename }}"
 
-# Command to execute. Currently supported eth1, eth2, filecoin
+# Command to execute. Currently supported eth1, eth2
 web3signer_command: 'eth2'
 
 # Set of options applicable irrespective of the command
@@ -76,7 +76,6 @@ web3signer_config_options:
     - "slashing-protection-db-url: 'jdbc:postgresql://{{ web3signer_db_host }}/{{ web3signer_db_name }}'"
     - "slashing-protection-db-username: {{ web3signer_db_username }}"
     - "slashing-protection-db-password: {{ web3signer_db_password }}"
-  filecoin: []
 
 # Can configure additional configuration parameters here.
 # It is upto user to configure them correctly and not to duplicate existing configuration
@@ -99,7 +98,7 @@ web3signer_http_host_allowlist: ['127.0.0.1']
 web3signer_metrics_enabled: False
 web3signer_metrics_host: '127.0.0.1'
 web3signer_metrics_port: 9001
-web3signer_metrics_categories: ['HTTP', 'SIGNING', 'FILECOIN', 'JVM', 'PROCESS', 'ETH2_SLASHING_PROTECTION']
+web3signer_metrics_categories: ['HTTP', 'SIGNING', 'JVM', 'PROCESS', 'ETH2_SLASHING_PROTECTION']
 web3signer_metrics_host_allowlist: ['127.0.0.1']
 web3signer_idle_connection_timeout_seconds: 30
 web3signer_swagger_ui_enabled: False
