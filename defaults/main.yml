@@ -1,9 +1,7 @@
 ---
 # Web3signer binary
 web3signer_version: 'develop'
-web3signer_download_base: 'https://artifacts.consensys.net/public/web3signer/raw/names/web3signer.tar.gz'
-web3signer_download_url: "{{ web3signer_download_base }}/versions/{{ web3signer_version }}/web3signer-{{ web3signer_version }}.tar.gz"
-
+web3signer_download_url: "https://github.com/Consensys/web3signer/releases/download/{{ web3signer_version }}/web3signer-{{ web3signer_version }}.tar.gz"
 
 # OS user and group
 web3signer_user: 'web3signer'
