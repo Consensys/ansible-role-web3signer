@@ -1,7 +1,7 @@
 ---
 
 - name: Test | Check the application status - when TLS keystore is not set
-  uri:
+  ansible.builtin.uri:
     url: "http://127.0.0.1:{{ web3signer_http_listen_port }}/upcheck"
     status_code: [200]
     return_content: True
@@ -15,7 +15,7 @@
 
 # Need improvements if tls client authentication is enabled
 - name: Test | Check the application status - when TLS keystore is set
-  uri:
+  ansible.builtin.uri:
     url: "https://127.0.0.1:{{ web3signer_http_listen_port }}/upcheck"
     status_code: [200]
     return_content: True

@@ -1,7 +1,7 @@
 ---
 
 - name: Configure | Create configuration file
-  template:
+  ansible.builtin.template:
     dest: "{{ web3signer_config_file }}"
     src: 'web3signer.yml.j2'
     owner: "{{ web3signer_user }}"
@@ -13,7 +13,7 @@
 
 # Web3signer requires key files with .yaml extension
 - name: Configure | Configure validator key files
-  template:
+  ansible.builtin.template:
     src: 'key-file.yaml.j2'
     dest: "{{ web3signer_keystore_path }}/{{ item }}.yaml"
     owner: "{{ web3signer_user }}"

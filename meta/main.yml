@@ -1,29 +1,31 @@
 ---
+dependencies:
+  - name: community.general
+    version: 10.1.0
+
 galaxy_info:
-  author: Consensys
+  author: consensys
   role_name: web3signer
+  namespace: consensys
   description: Web3Signer is an open-source signing service developed under the Apache 2.0 license and written in Java.
-  company: Consensys
   license: license (Apache)
-  min_ansible_version: 2.9
+  min_ansible_version: '2.9'
   platforms:
     - name: Debian
       versions:
-        - jessie
         - stretch
+        - sid
     - name: Ubuntu
       versions:
-        - xenial
         - bionic
-        - cosmic
+        - jammy
+        - noble
     - name: EL
       versions:
-        - 7
+        - '7'
     - name: Fedora
       versions:
-        - 28
-        - 29
-        - 30
+        - 'all'
   galaxy_tags:
     - web3signer
     - blockchain

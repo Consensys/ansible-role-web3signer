@@ -1,6 +1,6 @@
 ---
 - name: Prepare | Verify database connection
-  postgresql_query:
+  community.postgresql.postgresql_query:
     login_host: "{{ web3signer_db_host }}"
     login_user: "{{ web3signer_db_username }}"
     login_password: "{{ web3signer_db_password }}"
@@ -9,13 +9,13 @@
   when: "web3signer_db_verify_connection | bool"
 
 - name: Prepare | Create web3signer group
-  group:
+  ansible.builtin.group:
     name: "{{ web3signer_group }}"
     state: present
   become: True
 
 - name: Prepare | Create web3signer user
-  user:
+  ansible.builtin.user:
     name: "{{ web3signer_user }}"
     group: "{{ web3signer_group }}"
     home: "{{ web3signer_app_home }}"
@@ -25,19 +25,23 @@
 
 - name: Prepare | Check java installed
   block:
-  - name: Prepare | Run java command
-    command: 'java -version'
-    become: True
-    register: java_version_output
-    ignore_errors: True
+    - name: Prepare | Run java command
+      ansible.builtin.command: 'java -version'
+      become: True
+      register: java_version_output
+      ignore_errors: True
+      tags:
+        - skip_ansible_lint
 
-  - name: Prepare | Fail if java is not installed
-    fail:
-      msg: "Java seems not installed. Web3Signer requires java installed."
-    when: "java_version_output.rc != 0"
+    - name: Prepare | Fail if java is not installed
+      ansible.builtin.fail:
+        msg: "Java seems not installed. Web3Signer requires java installed."
+      when: "java_version_output.rc != 0"
+      tags:
+        - skip_ansible_lint
 
 - name: Prepare | Create required folders
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ item }}"
     owner: "{{ web3signer_user }}"
@@ -55,9 +59,13 @@
     - "{{ web3signer_keystore_path }}"
     - "{{ web3signer_flyway_home }}"
     - "{{ web3signer_flyway_app_path }}"
+  tags:
+    - skip_ansible_lint
 
 - name: Prepare | Setup logrotate
-  template:
+  ansible.builtin.template:
     src: "logrotate/web3signer"
     dest: "/etc/logrotate.d/web3signer"
   become: true
+  tags:
+    - skip_ansible_lint

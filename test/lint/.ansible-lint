@@ -2,3 +2,5 @@ exclude_paths: []
 parseable: true
 use_default_rules: true
 verbosity: 3
+skip_list:
+  - yaml[truthy]

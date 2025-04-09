@@ -34,7 +34,7 @@ web3signer_flyway_binary_url_parts:
   - 'https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline'
   - "{{ web3signer_flyway_version }}"
   - "flyway-commandline-{{ web3signer_flyway_version }}-linux-x64.tar.gz"
-web3signer_flyway_binary_url: "{{ web3signer_flyway_binary_url_parts | join ('/') }}"
+web3signer_flyway_binary_url: "{{ web3signer_flyway_binary_url_parts | join('/') }}"
 web3signer_flyway_home: '/opt/flyway'
 web3signer_flyway_app_path: "/opt/flyway/flyway-{{ web3signer_flyway_version }}"
 web3signer_flyway_app_current: "{{ web3signer_flyway_home }}/current"
