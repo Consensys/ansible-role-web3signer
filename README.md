@@ -62,7 +62,6 @@ Please refer to the Web3Signer [docs](https://docs.web3signer.consensys.net/en/l
 | web3signer_metrics_categories    | ['HTTP', 'SIGNING', 'JVM', 'PROCESS', 'ETH2_SLASHING_PROTECTION'] | Comma separated list of categories to track metrics for |
 | web3signer_metrics_host_allowlist| ['127.0.0.1']        | Comma separated list of hostnames to allow for metrics access, or * to accept any host |
 | web3signer_idle_connection_timeout_seconds | `30`       | Number of seconds after which an idle connection will be terminated |
-| web3signer_swagger_ui_enabled    | `False`              | Enable swagger UI |
 | web3signer_tls_keystore_file     |                      | Path to a PKCS#12 formatted keystore used to enable TLS on inbound connections |
 | web3signer_tls_keystore_password_file |                 | Path to a file containing the password used to decrypt the keystore |
 | web3signer_tls_allow_any_client  |                      | If defined, any client may connect, regardless of presented certificate. This cannot be set if either a whitelist or CA clients have been enabled |

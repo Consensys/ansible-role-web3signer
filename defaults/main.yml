@@ -99,4 +99,3 @@ web3signer_metrics_port: 9001
 web3signer_metrics_categories: ['HTTP', 'SIGNING', 'JVM', 'PROCESS', 'ETH2_SLASHING_PROTECTION']
 web3signer_metrics_host_allowlist: ['127.0.0.1']
 web3signer_idle_connection_timeout_seconds: 30
-web3signer_swagger_ui_enabled: False
