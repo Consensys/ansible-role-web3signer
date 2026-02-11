@@ -1,7 +1,5 @@
 ---
-dependencies:
-  - name: community.general
-    version: 10.1.0
+dependencies: []
 
 galaxy_info:
   author: consensys
