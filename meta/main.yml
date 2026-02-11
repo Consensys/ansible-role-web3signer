@@ -1,6 +1,9 @@
 ---
 dependencies: []
 
+collections:
+  - community.general
+
 galaxy_info:
   author: consensys
   role_name: web3signer
